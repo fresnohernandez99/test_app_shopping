@@ -1,0 +1,118 @@
+buildscript {
+    dependencies {
+        def hiltCoreVersion = "2.42"
+        classpath "com.google.dagger:hilt-android-gradle-plugin:$hiltCoreVersion"
+    }
+}
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+plugins {
+    id 'com.android.application' version '7.1.2' apply false
+    id 'com.android.library' version '7.1.2' apply false
+    id 'org.jetbrains.kotlin.android' version '1.6.21' apply false
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+ext.versions = [
+        hiltCoreVersion        : "2.42",
+        hiltVersion            : "1.0.0",
+        fragmentVersion        : "1.4.1",
+        activityVersion        : "1.4.0",
+        constraintLayoutVersion: "2.1.3",
+        recyclerVersion        : "1.2.1",
+        lifecycleVersion       : "2.4.1",
+        roomVersion            : "2.4.2",
+        coroutinesVersion      : "1.6.0",
+        navVersion             : "2.4.2",
+        glideVersion           : "4.13.2",
+        appcompat              : "1.4.1",
+        core_ktx               : "1.7.0",
+        material               : "1.6.0",
+        junit                  : "4.13.2",
+        ext_junit              : "1.1.3",
+        espresso_core          : "3.4.0",
+        retrofitVersion        : "2.9.0",
+        okhttpVersion          : "4.9.1",
+        facebookLogin          : "13.2.0",
+        googleLogin            : "20.2.0",
+        multidexVersion        : "2.0.1",
+        annotationVersion      : "1.2.0",
+
+]
+
+ext.deps = [
+        app          : [
+                compileSdkVersion: 32,
+                minSdkVersion    : 21,
+                targetSdkVersion : 32,
+                versionCode      : 1,
+                versionName      : "0.0.1"
+        ],
+        material     : [
+                material: "com.google.android.material:material:${versions.material}"
+        ],
+        test         : [
+                junit        : "junit:junit:${versions.junit}",
+                ext_junit    : "androidx.test.ext:junit:${versions.ext_junit}",
+                espresso_core: "androidx.test.espresso:espresso-core:${versions.espresso_core}"
+        ],
+        hilt         : [
+                hiltCompiler       : "androidx.hilt:hilt-compiler:${versions.hiltVersion}",
+                hiltAndroid        : "com.google.dagger:hilt-android:${versions.hiltCoreVersion}",
+                hiltAndroidCompiler: "com.google.dagger:hilt-android-compiler:${versions.hiltCoreVersion}"
+        ],
+        androidx     : [
+                core_ktx               : "androidx.core:core-ktx:${versions.core_ktx}",
+                appcompat              : "androidx.appcompat:appcompat:${versions.appcompat}",
+                constraintLayoutVersion: "androidx.constraintlayout:constraintlayout:${versions.constraintLayout}",
+                fragment_ktx           : "androidx.fragment:fragment-ktx:${versions.fragmentVersion}",
+                activity_ktx           : "androidx.activity:activity-ktx:${versions.activityVersion}",
+                constraintlayout       : "androidx.constraintlayout:constraintlayout:${versions.constraintLayoutVersion}",
+                recyclerview           : "androidx.recyclerview:recyclerview:${versions.recyclerVersion}",
+        ],
+        lifecycle    : [
+                lifecycle_viewmodel_ktx       : "androidx.lifecycle:lifecycle-viewmodel-ktx:${versions.lifecycleVersion}",
+                lifecycle_viewmodel_savedstate: "androidx.lifecycle:lifecycle-viewmodel-savedstate:${versions.lifecycleVersion}",
+                lifecycle_livedata_ktx        : "androidx.lifecycle:lifecycle-livedata-ktx:${versions.lifecycleVersion}"
+        ],
+        room         : [
+                room_runtime : "androidx.room:room-runtime:${versions.roomVersion}",
+                room_ktx     : "androidx.room:room-ktx:${versions.roomVersion}",
+                room_compiler: "androidx.room:room-compiler:${versions.roomVersion}"
+        ],
+        coroutines   : [
+                kotlinx_coroutines_core   : "org.jetbrains.kotlinx:kotlinx-coroutines-core:${versions.coroutinesVersion}",
+                kotlinx_coroutines_android: "org.jetbrains.kotlinx:kotlinx-coroutines-android:${versions.coroutinesVersion}"
+        ],
+        navigation   : [
+                navigation_fragment_ktx: "androidx.navigation:navigation-fragment-ktx:${versions.navVersion}",
+                navigation_ui_ktx      : "androidx.navigation:navigation-ui-ktx:${versions.navVersion}"
+        ],
+        glide        : [
+                glide         : "com.github.bumptech.glide:glide:${versions.glideVersion}",
+                glide_compiler: "com.github.bumptech.glide:compiler:${versions.glideVersion}"
+        ],
+        retrofit     : [
+                retrofit      : "com.squareup.retrofit2:retrofit:${versions.retrofitVersion}",
+                converter_gson: "com.squareup.retrofit2:converter-gson:${versions.retrofitVersion}"
+        ],
+        okhttpVersion: [
+                okhttp             : "com.squareup.okhttp3:okhttp:${versions.okhttpVersion}",
+                logging_interceptor: "com.squareup.okhttp3:logging-interceptor:${versions.okhttpVersion}"
+        ],
+        facebook     : [
+                login: "com.facebook.android:facebook-login:${versions.facebookLogin}"
+        ],
+        google       : [
+                login: "com.google.android.gms:play-services-auth:${versions.googleLogin}"
+        ],
+        multidex     : [
+                multidex: "androidx.multidex:multidex:${versions.multidexVersion}"
+        ],
+        annotation   : [
+                annotation: "androidx.annotation:annotation:${versions.annotationVersion}"
+        ]
+
+]

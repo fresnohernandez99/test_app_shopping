@@ -1,0 +1,105 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+}
+
+android {
+    compileSdk deps.app.compileSdkVersion
+
+    defaultConfig {
+        applicationId "com.test.app"
+        minSdk deps.app.minSdkVersion
+        targetSdk deps.app.targetSdkVersion
+        versionCode deps.app.versionCode
+        versionName deps.app.VersionName
+
+        multiDexEnabled true
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    signingConfigs {
+        config {
+            // Set the parameters based on the actual signing information.
+            storeFile file('test.p12')
+            storePassword 'testtest'
+            keyPassword 'testtest'
+            keyAlias 'key0'
+        }
+    }
+
+    hilt {
+        enableAggregatingTask = true
+    }
+
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.config
+        }
+        release {
+            signingConfig signingConfigs.config
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    lintOptions {
+        quiet true
+        abortOnError false
+        ignoreWarnings true
+        checkReleaseBuilds false
+    }
+
+    buildFeatures {
+        dataBinding = true
+        viewBinding true
+    }
+}
+
+dependencies {
+    implementation project(':app:core')
+    implementation project(':app:login')
+
+    implementation deps.annotation.annotation
+
+    kapt deps.hilt.hiltCompiler
+    api deps.hilt.hiltAndroid
+    kapt deps.hilt.hiltAndroidCompiler
+
+    implementation project(':app:login')
+
+    api deps.androidx.core_ktx
+    api deps.androidx.appcompat
+    api deps.androidx.constraintLayoutVersion
+    api deps.androidx.fragment_ktx
+    api deps.androidx.activity_ktx
+    api deps.androidx.constraintlayout
+    api deps.androidx.recyclerview
+    api deps.material.material
+
+    api deps.lifecycle.lifecycle_viewmodel_ktx
+    api deps.lifecycle.lifecycle_viewmodel_savedstate
+    implementation deps.lifecycle.lifecycle_livedata_ktx
+
+    //api deps.room.room_runtime
+    //api deps.room.room_ktx
+    //kapt deps.room.room_compiler
+
+    api deps.coroutines.kotlinx_coroutines_core
+    api deps.coroutines.kotlinx_coroutines_android
+
+    api deps.navigation.navigation_fragment_ktx
+    api deps.navigation.navigation_ui_ktx
+
+    api deps.multidex.multidex
+}
